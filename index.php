@@ -1,7 +1,6 @@
 <?php
     require_once __DIR__ . "/hotels.php";
 
-
     if (isset($_GET['parking'])) {
         // Filtro gli hotel in base al parcheggio
         $hotels = array_filter($hotels, function ($hotel) {
@@ -21,7 +20,7 @@
     <main>
         <form action="./index.php" method="get">
             <label for="parking">Do you need a parking?</label>
-            <input type="checkbox" id="parking" name="parking" value="1" <?php echo isset($_GET['parking']) ? $_GET['parking'] : ''; ?>>
+            <input type="checkbox" id="parking" name="parking" value="1" <?php echo isset($_GET['parking']) ? 'checked' : ''; ?>>
             <button type="submit">Filtra</button>
         </form>
         <ul>
