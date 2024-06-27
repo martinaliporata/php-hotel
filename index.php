@@ -1,5 +1,13 @@
 <?php
-    require_once __DIR__ . "/hotels.php"
+    require_once __DIR__ . "/hotels.php";
+
+
+    if (isset($_GET['parking'])) {
+        // Filtro gli hotel in base al parcheggio
+        $hotels = array_filter($hotels, function ($hotel) {
+            return $hotel['parking'] === true;
+        });
+    }
 ?>
 
 <!DOCTYPE html>
@@ -12,15 +20,18 @@
 <body>
     <main>
         <form action="./index.php" method="get">
-            <label for="parking">Parking</label>
-            <input type="text" name="parking" id="parking">
+            <label for="parking">Do you need a parking?</label>
+            <input type="checkbox" id="parking" name="parking" value="1" <?php echo isset($_GET['parking']) ? $_GET['parking'] : ''; ?>>
+            <button type="submit">Filtra</button>
         </form>
         <ul>
             <?php foreach ($hotels as $hotel) { ?>
-                <li>
-                    <?php echo $hotel["name"] . " " . $hotel["description"] . " " . $hotel["parking"] . " " . $hotel["vote"] . " " . $hotel["distance_to_center"] ?>
-                </li>
-            <?php } ?>            
+                <h2>Nome: <?php echo $hotel['name'] ?></h2>
+                <p> Descrizione: <?php echo $hotel['description'] ?></p>
+                <p>Parcheggio: <?php echo ($hotel['parking'] ? 'Sì' : 'No')?></p>
+                <p>Voto: <?php echo $hotel['vote'] ?></p>
+                <p>Distanza dal centro città:<?php echo $hotel['distance_to_center'] ?></p>
+            <?php } ?>
         </ul>
     </main>
 </body>

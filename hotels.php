@@ -36,11 +36,4 @@
             'distance_to_center' => 50
         ],
     ];
-
-    $parkingHotels = array_filter($hotels, function ($hotel) {
-            if ($hotel["parking"] === true) {
-                return $hotel["parking"];
-            }
-        }
-    );
 ?>
